@@ -2,6 +2,7 @@
 using System.Runtime;
 using WebApplication1.DtoModels.DtoAuthor;
 using WebApplication1.DtoModels.DtoBook;
+using WebApplication1.DtoModels.DtoGenres;
 using WebApplication1.DtoModels.DtoPublishers;
 using WebApplication1.Models;
 
@@ -16,6 +17,8 @@ namespace WebApplication1
             CreateMap<Authors, DtoAuthorShortInfo>();
             CreateMap<Books, DtoBookShortInfo>();
             CreateMap<Publishers, DtoPublisherShortInfo>();
+            CreateMap<Genres, DtoGenresShortInfo>();
+
             // Маппинг для Author
             CreateMap<Authors, DtoAuthors>()
                 .ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books));
@@ -41,8 +44,9 @@ namespace WebApplication1
             CreateMap<DtoBooksCreate, Books>();
             CreateMap<DtoBooksUpdate, Books>();
 
-            
-
+            // Маппинг для Genres
+            CreateMap<Genres, DtoGenres>();
+            CreateMap<Genres, DtoGenresResponce>();
         }
     }
 }

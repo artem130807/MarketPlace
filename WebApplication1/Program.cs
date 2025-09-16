@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using WebApplication1;
 using WebApplication1.Contracts.ContractsAuthors;
 using WebApplication1.Contracts.ContractsBook;
+using WebApplication1.Contracts.ContractsGenres;
 using WebApplication1.Repositories;
 using WebApplication1.Service;
 
@@ -19,6 +20,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAuthorRepository, AuthorsRepositories>();
 builder.Services.AddScoped<IAuthorsService, AuthorService>();
+
+builder.Services.AddScoped<IGenresRepository, GenresRepositori>();
+builder.Services.AddScoped<IGenresService, GenresService>();    
 
 builder.Services.AddScoped<IBooksRepository, BooksRepositori>();
 builder.Services.AddScoped<IBooksService, BooksService>();

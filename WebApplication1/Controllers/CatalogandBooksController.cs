@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using WebApplication1.Contracts.ContractsAuthors;
 using WebApplication1.Contracts.ContractsBook;
+using WebApplication1.Contracts.ContractsGenres;
 
 namespace WebApplication1.Controllers
 {
@@ -9,13 +10,15 @@ namespace WebApplication1.Controllers
     [Route("api/[controller]")]
     public class CatalogandBooksController : ControllerBase
     {
-       private readonly IAuthorsService _authorsService;
+        private readonly IAuthorsService _authorsService;
         private readonly IBooksService _booksService;
+        private readonly IGenresService _genresService;
 
-       public CatalogandBooksController(IAuthorsService authorsService, IBooksService booksService)
+       public CatalogandBooksController(IAuthorsService authorsService, IBooksService booksService, IGenresService genresService)
        {
             _authorsService = authorsService;
             _booksService = booksService;
+            _genresService = genresService;
        }
         
         [HttpGet("authors/{id}")]
@@ -28,7 +31,7 @@ namespace WebApplication1.Controllers
             }
             return Ok(author);
         }
-        [HttpGet]
+        [HttpGet("books")]
         public async Task<IActionResult> GetBooks()
         {
             var books = await _booksService.GetBooks();
@@ -43,6 +46,18 @@ namespace WebApplication1.Controllers
                 return BadRequest("Книга не найдена");
             }
             return Ok(book);
+        }
+        [HttpGet("authors")]
+        public async Task<IActionResult> GetAuthors()
+        {
+            var authors = await _authorsService.GetAuthors();
+            return Ok(authors);
+        }
+        [HttpGet("genres")]
+        public async Task<IActionResult> GetGenres()
+        {
+            var genres = await _genresService.GetGenres();
+            return Ok(genres);
         }
     }
 }
