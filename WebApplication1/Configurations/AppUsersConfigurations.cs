@@ -10,8 +10,19 @@ namespace WebApplication1.Configurations
         {
             builder.ToTable("Users");
             builder.HasKey(x => x.Id);
+            
             builder.Property(t => t.LastName).HasMaxLength(50).IsRequired();
             builder.Property(t => t.FirstName).HasMaxLength(50).IsRequired();
+
+            builder.Property(u => u.Email)
+                .IsRequired()
+                .HasMaxLength(256);
+
+            builder.HasIndex(u => u.Email)
+               .IsUnique(); // Уникальный email
+
+            builder.Property(u => u.PasswordHash)
+                .IsRequired();
         }
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 using WebApplication1.Contracts.ContractsAuthors;
 using WebApplication1.Contracts.ContractsBook;
 using WebApplication1.Contracts.ContractsGenres;
+using WebApplication1.DtoModels.DtoBook;
+using WebApplication1.ModelsFiltr;
 
 namespace WebApplication1.Controllers
 {
@@ -58,6 +60,12 @@ namespace WebApplication1.Controllers
         {
             var genres = await _genresService.GetGenres();
             return Ok(genres);
+        }
+        [HttpGet("booksfiltr")]
+        public async Task<IActionResult> GetBooksFiltr([FromQuery] DtoBookFiltr dtoBookFiltr)
+        {
+            var books = await _booksService.GetBooksFiltr(dtoBookFiltr);
+            return Ok(books);
         }
     }
 }

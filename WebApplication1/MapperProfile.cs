@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using System.Runtime;
+using WebApplication1.DtoModels.DtoAppUser;
 using WebApplication1.DtoModels.DtoAuthor;
+using WebApplication1.DtoModels.DtoBasket;
 using WebApplication1.DtoModels.DtoBook;
 using WebApplication1.DtoModels.DtoGenres;
 using WebApplication1.DtoModels.DtoPublishers;
@@ -18,7 +20,8 @@ namespace WebApplication1
             CreateMap<Books, DtoBookShortInfo>();
             CreateMap<Publishers, DtoPublisherShortInfo>();
             CreateMap<Genres, DtoGenresShortInfo>();
-
+            CreateMap<CartItems, DtoCartShortInfo>();
+            
             // Маппинг для Author
             CreateMap<Authors, DtoAuthors>()
                 .ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books));
@@ -40,13 +43,25 @@ namespace WebApplication1
                 .ForMember(dest => dest.Publisher, opt => opt.MapFrom(src => src.Publisher));
 
 
-
             CreateMap<DtoBooksCreate, Books>();
             CreateMap<DtoBooksUpdate, Books>();
 
             // Маппинг для Genres
             CreateMap<Genres, DtoGenres>();
             CreateMap<Genres, DtoGenresResponce>();
+
+            // Маппинг для CartItems
+            CreateMap<CartItems, DtoCart>();
+            CreateMap<CartItems, DtoCartResponce>();
+
+            CreateMap<CartItems, DtoCartResponce>()
+            .ForMember(dest => dest.BookTitle, opt => opt.MapFrom(src => src.Book.Title))
+            .ForMember(dest => dest.BookPrice, opt => opt.MapFrom(src => src.Book.Price));
+
+            // Маппинг для AppUsers
+            CreateMap<AppUsers, DtoUser>();
+            CreateMap<AppUsers, DtoUserResponce>();
+            
         }
     }
 }
