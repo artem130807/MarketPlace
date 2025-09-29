@@ -70,6 +70,10 @@ namespace WebApplication1.Service
             return _mapper.Map<List<DtoBookResponce>>(books);
         }
 
-       
+        public async Task<DtoBookByName> GetBookByTitle(string titlename)
+        {
+            var book = await _booksRepository.GetBookByTitle(titlename);
+            return _mapper.Map<DtoBookByName>(book);
+        }
     }
 }

@@ -7,6 +7,8 @@ using WebApplication1.Contracts.ContractsBasket;
 using WebApplication1.Contracts.ContractsBook;
 using WebApplication1.Contracts.ContractsCart;
 using WebApplication1.Contracts.ContractsGenres;
+using WebApplication1.Contracts.ContractsOrderItems;
+using WebApplication1.Contracts.ContractsReviews;
 using WebApplication1.Extensionss;
 using WebApplication1.Provider;
 using WebApplication1.Repositories;
@@ -47,6 +49,12 @@ builder.Services.AddScoped<IBooksService, BooksService>();
 
 builder.Services.AddScoped<ICartRepository, CartItemsRepository>();
 builder.Services.AddScoped<ICartService, CartItemsService>();
+
+builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
+
+builder.Services.AddScoped<IReviewsRepository, ReviewsRepository>();
+builder.Services.AddScoped<IReviewsService, ReviewsService>();
 
 // Сервисы аутентификации
 builder.Services.AddScoped<IHasherPassword, PasswordHasher>();

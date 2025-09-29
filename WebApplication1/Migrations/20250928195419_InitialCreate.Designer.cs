@@ -12,7 +12,7 @@ using WebApplication1;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(MarketPlaceDbContext))]
-    [Migration("20250920191444_InitialCreate")]
+    [Migration("20250928195419_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -203,9 +203,6 @@ namespace WebApplication1.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BooksId")
-                        .HasColumnType("int");
-
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -218,8 +215,6 @@ namespace WebApplication1.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("BooksId");
 
                     b.HasIndex("OrderId");
 
@@ -367,14 +362,10 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.OrderItems", b =>
                 {
                     b.HasOne("WebApplication1.Models.Books", "Book")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("WebApplication1.Models.Books", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("BooksId");
 
                     b.HasOne("WebApplication1.Models.Orders", "Orders")
                         .WithMany("Items")

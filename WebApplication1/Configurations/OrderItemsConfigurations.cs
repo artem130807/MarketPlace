@@ -16,9 +16,10 @@ namespace WebApplication1.Configurations
             .WithMany(t => t.Items)
             .HasForeignKey(t => t.OrderId);
 
-            builder.HasOne(t => t.Book) 
-            .WithMany()          
+            builder.HasOne(t => t.Book)
+            .WithMany(t => t.OrderItems)
             .HasForeignKey(t => t.BookId);
+       
         }
     }
 }

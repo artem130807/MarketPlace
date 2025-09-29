@@ -30,11 +30,13 @@ namespace WebApplication1.Repositories
 
         public async Task<Books> GetBookById(int id)
         {
-            var book = await _context.Books.Include(x => x.Author).Include(x => x.Publisher).FirstOrDefaultAsync(x => x.Id == id);
-            if (book == null)
-            {
-                throw new Exception("Ошибка");
-            }
+            var book = await _context.Books.Include(x => x.Author).Include(x => x.Publisher).FirstOrDefaultAsync(x => x.Id == id);          
+            return book;
+        }
+
+        public async Task<Books> GetBookByTitle(string name)
+        {
+            var book = await _context.Books.Include(x => x.Author).Include(x => x.Publisher).FirstOrDefaultAsync(x => x.Title == name);
             return book;
         }
 

@@ -208,8 +208,7 @@ namespace WebApplication1.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    BooksId = table.Column<int>(type: "int", nullable: true)
+                    OrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,11 +219,6 @@ namespace WebApplication1.Migrations
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderItems_Books_BooksId",
-                        column: x => x.BooksId,
-                        principalTable: "Books",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
@@ -262,11 +256,6 @@ namespace WebApplication1.Migrations
                 name: "IX_OrderItems_BookId",
                 table: "OrderItems",
                 column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderItems_BooksId",
-                table: "OrderItems",
-                column: "BooksId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
